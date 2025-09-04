@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
+import ExpenseList from "../components/ExpensesList/ExpenseList";
 
 function RecentExpensesScreen(){
     return <View styles={styles.rootContainer}>
-        <Text>Hi this is recent Expenses</Text>
+        <ExpenseList expensePeriod="Last 7 days"/>
     </View>
 }
 

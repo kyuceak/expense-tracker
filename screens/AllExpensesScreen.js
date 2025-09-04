@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import ExpenseList from "../components/ExpensesList/ExpenseList";
 
 function AllExpensesScreen(){
-    return <ExpenseList/>
+    return <ExpenseList expensesPeriod="Total"/>
 }
 
 

@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RecentExpensesScreen from "./screens/RecentExpensesScreen";
 import AllExpensesScreen from "./screens/AllExpensesScreen";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+import { GlobalStyles } from "./constants/styles";
+import IconButton from "./components/ui/IconButton";
 
 const RootStack = createNativeStackNavigator();
 const Stack = createNativeStackNavigator();
@@ -33,17 +35,13 @@ function BottomTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: "#5c1cd4ff" },
+        headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         headerTintColor: "white",
         sceneStyle: { backgroundColor: "#4a1aa2ff" },
-        tabBarStyle: { backgroundColor: "#5c1cd4ff" },
-        headerRight: ({ color, size }) => (
-          <AntDesign
-            name="plus"
-            color="white"
-            size={24}
-            style={{ paddingRight: 15}}
-          />
+        tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+        tabBarActiveTintColor: GlobalStyles.colors.accent500,
+        headerRight: ({ tintColor}) => (
+         <IconButton icon="plus" size={24} color={tintColor} onPress={() => {}}/>
         ),
       }}
     >
@@ -51,6 +49,7 @@ function BottomTabs() {
         name="Recent Expenses"
         component={RecentExpensesScreen}
         options={{
+          tabBarLabel: "Recent",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="timer-sand-empty"
@@ -58,7 +57,7 @@ function BottomTabs() {
               size={size}
             />
           ),
-          tabBarActiveTintColor: "#faab45ff",
+          
           tabBarLabelStyle: { fontSize: 14, fontWeight: "bold" },
         }}
       ></Tab.Screen>
@@ -73,7 +72,6 @@ function BottomTabs() {
               size={size}
             />
           ),
-          tabBarActiveTintColor: "#faab45ff",
           tabBarLabelStyle: { fontSize: 14, fontWeight: "bold" },
         }}
       ></Tab.Screen>
