@@ -9,6 +9,7 @@ import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import { GlobalStyles } from "./constants/styles";
 import IconButton from "./components/ui/IconButton";
 import ManageExpensesScreen from "./screens/ManageExpensesScreen";
+import ExpensesContextProvider from "./store/expenses-context";
 
 const RootStack = createNativeStackNavigator();
 
@@ -73,6 +74,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="light"></StatusBar>
+      <ExpensesContextProvider>
       <NavigationContainer>
         <RootStack.Navigator
           screenOptions={{
@@ -94,6 +96,7 @@ export default function App() {
           ></RootStack.Screen>
         </RootStack.Navigator>
       </NavigationContainer>
+      </ExpensesContextProvider>
     </>
   );
 }
