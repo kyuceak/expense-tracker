@@ -65,6 +65,7 @@ function renderExpenseItem(itemData) {
   console.log(item);
   return (
     <ExpenseItem
+      id={item.id}
       title={item.desc}
       date={item.date.toISOString().substring(0, 10)}
       amount={item.amount}

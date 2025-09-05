@@ -8,42 +8,32 @@ import AllExpensesScreen from "./screens/AllExpensesScreen";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import { GlobalStyles } from "./constants/styles";
 import IconButton from "./components/ui/IconButton";
+import ManageExpensesScreen from "./screens/ManageExpensesScreen";
 
 const RootStack = createNativeStackNavigator();
-const Stack = createNativeStackNavigator();
+
 const Tab = createBottomTabNavigator();
-
-function AllExpensesStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen></Stack.Screen>
-      <Stack.Screen></Stack.Screen>
-    </Stack.Navigator>
-  );
-}
-
-function RecentExpensesStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen></Stack.Screen>
-      <Stack.Screen></Stack.Screen>
-    </Stack.Navigator>
-  );
-}
 
 function BottomTabs() {
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         headerTintColor: "white",
         sceneStyle: { backgroundColor: "#4a1aa2ff" },
         tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         tabBarActiveTintColor: GlobalStyles.colors.accent500,
-        headerRight: ({ tintColor}) => (
-         <IconButton icon="plus" size={24} color={tintColor} onPress={() => {}}/>
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            icon="plus"
+            size={24}
+            color={tintColor}
+            onPress={() => {
+              navigation.navigate("ManageExpense");
+            }}
+          />
         ),
-      }}
+      })}
     >
       <Tab.Screen
         name="Recent Expenses"
@@ -57,7 +47,7 @@ function BottomTabs() {
               size={size}
             />
           ),
-          
+
           tabBarLabelStyle: { fontSize: 14, fontWeight: "bold" },
         }}
       ></Tab.Screen>
@@ -84,13 +74,24 @@ export default function App() {
     <>
       <StatusBar style="light"></StatusBar>
       <NavigationContainer>
-        <RootStack.Navigator>
+        <RootStack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+            headerTintColor: "white",
+          }}
+        >
           <RootStack.Screen
             name="Tabs"
             component={BottomTabs}
             options={{ headerShown: false }}
           ></RootStack.Screen>
-          {/* <RootStack.Screen name="AddExpense"></RootStack.Screen> */}
+          <RootStack.Screen
+            name="ManageExpense"
+            component={ManageExpensesScreen}
+            options={{
+              presentation: "modal"
+            }}
+          ></RootStack.Screen>
         </RootStack.Navigator>
       </NavigationContainer>
     </>

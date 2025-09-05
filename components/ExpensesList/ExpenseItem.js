@@ -1,26 +1,34 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
+import { useNavigation } from "@react-navigation/native";
+// since ExpenseItem component is not a screen, we have to use useNavigation hook to navigate
 
-function ExpenseItem({ title, date, amount, onPress }) {
-  function expensePressHandler() {}
+function ExpenseItem({ id ,title, date, amount }) {
+  const navigation = useNavigation();
+
+  function expensePressHandler() {
+    navigation.navigate("ManageExpense", {
+        expenseId: id
+    });
+  }
 
   return (
     <View style={styles.deneme}>
-    <Pressable
-      onPress={onPress}
-      style={({ pressed }) => pressed && styles.pressed}
-      android_ripple={{color: "#ccc"}}
-    >
-      <View style={styles.itemContainer}>
-        <View>
-          <Text style={styles.ExpenseName}>{title}</Text>
-          <Text style={styles.dateText}>{date}</Text>
+      <Pressable
+        onPress={expensePressHandler}
+        style={({ pressed }) => pressed && styles.pressed}
+        android_ripple={{ color: "#ccc" }}
+      >
+        <View style={styles.itemContainer}>
+          <View>
+            <Text style={styles.ExpenseName}>{title}</Text>
+            <Text style={styles.dateText}>{date}</Text>
+          </View>
+          <View style={styles.priceBox}>
+            <Text style={styles.priceText}>{amount.toFixed(2)}</Text>
+          </View>
         </View>
-        <View style={styles.priceBox}>
-          <Text style={styles.priceText}>{amount.toFixed(2)}</Text>
-        </View>
-      </View>
-    </Pressable>
+      </Pressable>
     </View>
   );
 }
@@ -32,7 +40,6 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: GlobalStyles.colors.primary500,
 
-   
     elevation: 3,
     shadowColor: GlobalStyles.colors.gray500,
     shadowRadius: 4,
@@ -65,9 +72,9 @@ const styles = StyleSheet.create({
   },
   deneme: {
     overflow: "hidden",
-        borderRadius: 12,
-         marginVertical: 8,
-  }
+    borderRadius: 12,
+    marginVertical: 8,
+  },
 });
 
 export default ExpenseItem;
