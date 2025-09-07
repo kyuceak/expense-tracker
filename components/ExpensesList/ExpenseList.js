@@ -31,7 +31,7 @@ function ExpenseList({ expenses, expensesPeriod, fallBackText }) {
             data={expenses}
             renderItem={renderExpenseItem}
             keyExtractor={(item) => item.id}
-          />{" "}
+          />
         </>
       ) : (
         content

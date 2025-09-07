@@ -74,11 +74,12 @@ function expensesReducer(state, action){
             const id = new Date().toString + Math.random().toString();
             return [{ ...action.payload, id: id},...state]
         case "UPDATE":
-            const updatableExpenseIndex = state.find((item) => item.id === action.payload.id);
+            const updatableExpenseIndex = state.findIndex((item) => item.id === action.payload.id);
             const updateableExpense = state[updatableExpenseIndex];
             const updatedItem = { ...updateableExpense, ...action.payload.data};
             const updatedExpenses = [...state];
             updatedExpenses[updatableExpenseIndex] = updatedItem;
+           
             return updatedExpenses;
         case "DELETE":
             return state.filter((item) => item.id !== action.payload)
