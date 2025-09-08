@@ -5,12 +5,12 @@ import { GlobalStyles } from "../../constants/styles";
 
 function renderExpenseItem(itemData) {
   const item = itemData.item;
-
+  console.log("item: ", item);
   return (
     <ExpenseItem
       id={item.id}
       title={item.desc}
-      date={item.date.toISOString().substring(0, 10)}
+      date={new Date(item.date).toISOString().substring(0, 10)}
       amount={item.amount}
     />
   );

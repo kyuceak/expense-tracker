@@ -12,7 +12,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
       isValid: true
     },
     date: {
-      value: defaultValues ? defaultValues.date.toISOString().slice(0, 10) : "",
+      value: defaultValues ? new Date(defaultValues.date).toISOString().slice(0, 10) : "",
       isValid: true
     },
     desc: {
@@ -36,7 +36,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
       date: new Date(inputs.date.value),
       desc: inputs.desc.value,
     };
-    console.log(expenseData);
+  
 
     const amountIsValid =
       !isNaN(expenseData.amount) && expenseData.amount > 0;
